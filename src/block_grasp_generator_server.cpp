@@ -87,7 +87,7 @@ namespace block_grasp_generator
     {
       // ---------------------------------------------------------------------------------------------
       // Load grasp data specific to our robot
-      grasp_data_ = reem_pick_place::loadRobotGraspData(side_); // Load robot specific data
+      grasp_data_ = reem_pick_place::loadRobotGraspData(side_, nh_); // Load robot specific data
 
       // ---------------------------------------------------------------------------------------------
       // Load the Robot Viz Tools for publishing to Rviz

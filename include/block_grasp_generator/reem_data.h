@@ -52,7 +52,7 @@ static const double FINGER_JOINT_CLOSED = 4.5; //close
 // robot dimensions
 static const double FLOOR_TO_BASE_HEIGHT = -0.9;
 
-block_grasp_generator::RobotGraspData loadRobotGraspData(const std::string& side)
+block_grasp_generator::RobotGraspData loadRobotGraspData(const std::string& side, const ros::NodeHandle &nh)
 {
   block_grasp_generator::RobotGraspData grasp_data;
 
@@ -104,8 +104,18 @@ block_grasp_generator::RobotGraspData loadRobotGraspData(const std::string& side
   grasp_data.grasp_posture_.joint_names.push_back("hand_" + side + "_thumb_joint");
   // Position of joints
   grasp_data.grasp_posture_.points.resize(1);
-  grasp_data.grasp_posture_.points[0].positions.push_back(FINGER_JOINT_CLOSED);
-  grasp_data.grasp_posture_.points[0].positions.push_back(FINGER_JOINT_CLOSED);
+  // Simulated hand in Gazebo makes weird things if closing it too much with an object in it, fingers fly away
+  bool is_sim_time;
+  nh.getParam("/use_sim_time", is_sim_time);
+  if (is_sim_time == true){ // if in simulation
+      grasp_data.grasp_posture_.points[0].positions.push_back(FINGER_JOINT_CLOSED / 2); // close half
+      grasp_data.grasp_posture_.points[0].positions.push_back(FINGER_JOINT_CLOSED / 2);
+    }
+  else{
+      grasp_data.grasp_posture_.points[0].positions.push_back(FINGER_JOINT_CLOSED);
+      grasp_data.grasp_posture_.points[0].positions.push_back(FINGER_JOINT_CLOSED);
+    }
+
   grasp_data.grasp_posture_.points[0].positions.push_back(THUMB_JOINT_DOWN);
   grasp_data.grasp_posture_.points[0].time_from_start = ros::Duration(4,0);
 
