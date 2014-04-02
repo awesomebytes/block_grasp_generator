@@ -37,8 +37,6 @@
 */
 
 #include <block_grasp_generator/block_grasp_generator.h> // has datastructure
-#include <moveit/pick_place/pick_place.h>
-
 
 
 namespace reem_pick_place
@@ -95,7 +93,7 @@ block_grasp_generator::RobotGraspData loadRobotGraspData(const std::string& side
   grasp_data.pre_grasp_posture_.points[0].positions.push_back(FINGER_JOINT_OPEN);
   grasp_data.pre_grasp_posture_.points[0].positions.push_back(FINGER_JOINT_OPEN);
   grasp_data.pre_grasp_posture_.points[0].positions.push_back(THUMB_JOINT_DOWN); // just to debug -0.2
-  grasp_data.pre_grasp_posture_.points[0].time_from_start = ros::Duration(4.0 - pick_place::PickPlace::DEFAULT_GRASP_POSTURE_COMPLETION_DURATION); //trying to undo the hack they have for default time which gets added... not substituted
+  grasp_data.pre_grasp_posture_.points[0].time_from_start = ros::Duration(4.0); //trying to undo the hack they have for default time which gets added... not substituted
 
   // -------------------------------
   // Create grasp posture (fingers closed, thumb down)
@@ -122,7 +120,7 @@ block_grasp_generator::RobotGraspData loadRobotGraspData(const std::string& side
   grasp_data.grasp_posture_.points[0].positions.push_back(FINGER_JOINT_CLOSED);
   grasp_data.grasp_posture_.points[0].positions.push_back(FINGER_JOINT_CLOSED);
   grasp_data.grasp_posture_.points[0].positions.push_back(THUMB_JOINT_DOWN);
-  grasp_data.grasp_posture_.points[0].time_from_start = ros::Duration(4.0 - pick_place::PickPlace::DEFAULT_GRASP_POSTURE_COMPLETION_DURATION);
+  grasp_data.grasp_posture_.points[0].time_from_start = ros::Duration(4.0);
 
   // -------------------------------
   // SRDF Info
