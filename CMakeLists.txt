@@ -11,7 +11,6 @@ find_package(catkin REQUIRED
   visualization_msgs
   eigen_conversions
   moveit_ros_planning
-  moveit_ros_planning_interface
   moveit_ros_robot_interaction
   moveit_core
   tf
@@ -68,7 +67,6 @@ catkin_package(
     visualization_msgs 
     eigen_conversions 
     moveit_ros_planning 
-    moveit_ros_planning_interface
     moveit_ros_robot_interaction
     moveit_core
     tf
